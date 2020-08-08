@@ -1,17 +1,13 @@
-body{
+#playBtn{
+    background-color: green;
     
+    border-radius: 25px;
+}
+ul{
+    list-style-type: none;
+    display: inline-block;
 }
 
-#background{
-    background-repeat: no-repeat;
-    background-size: 100%;
-    transform: rotate(90deg);
-}
-
-#playerCar{
-    width: 450px;
-    transform: rotate(-80deg);
-    position: relative;
-    top: 500px;
-    left: 500px;
+body {
+    background-color: aliceblue;
 }
