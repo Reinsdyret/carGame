@@ -10,14 +10,17 @@ var carYoffset = 0;
 var farge;
 setInterval(draw(),1000);
 
+// Small thing for girlfriend ik SIMP
 var synne = prompt('Er du synne?');
 
 if(synne == 'ja') {
     farge = '#FFC0CB';
 }else{farge = '#000000'}
+//Small thing done
 
 
 function draw() {
+    //Draw function
     ctx.clearRect(0,0,10000,10000);
     //enemyCar();
     drawLine();
@@ -28,6 +31,7 @@ function draw() {
 }
 
 function drawLine() {
+    //Draws lines and rects in middle and changes positioning to look like moving
     var time = new Date();
     for(var i=-1000+time.getMilliseconds(); i <= 2000; i += 200) {
         ctx.beginPath();
@@ -49,6 +53,7 @@ function drawLine() {
 }
 
 function playerCar() {
+    //draws the player car based of position from the changeOffset function and color based on small thing from girlfriend
     ctx.beginPath();
     ctx.rect(x+carXoffset,600+carYoffset,100,200);
     ctx.fillStyle = farge;
@@ -56,24 +61,29 @@ function playerCar() {
 }
 
 function changeOffset(e){
-    console.log(e.code);
+    //Changes positioning of car
+    //console.log(e.code);
     switch(e.code){
         case('ArrowLeft'):
+        //if car is at line left
             if(carXoffset>=-195){
                 carXoffset -= 7;
                 break;
             }else{break;}
         case('ArrowRight'):
+        //if car is at line right
             if(carXoffset<=95){
                 carXoffset += 7;
                 break;
             }else{break;}
         case('ArrowUp'):
+        //if car is at the top
             if(carYoffset>=-550){
                 carYoffset -= 7;
                 break;
             }else{break;}
         case('ArrowDown'):
+        //if car is at the bottom
             if(carYoffset<=550){
                 carYoffset+=7;
                 break;
