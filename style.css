@@ -11,3 +11,5 @@ ul{
 body {
     background-color: aliceblue;
 }
+
+html { overflow-y: hidden; overflow-x: hidden; }

@@ -1,41 +1,82 @@
-
 var canvas = document.getElementById("canvas");
+document.addEventListener('keydown',changeOffset);
 canvas.width = window.innerWidth;
 canvas.height= window.innerHeight;
 var ctx = canvas.getContext("2d");
 var radius = canvas.height / 2;
-ctx.translate(radius, radius);
-setInterval(1000, draw());
+var x = radius;
+var carXoffset = 60;
+var carYoffset = 0;
+var farge;
+setInterval(draw(),1000);
+
+var synne = prompt('Er du synne?');
+
+if(synne == 'ja') {
+    farge = '#FFC0CB';
+}else{farge = '#000000'}
 
 
 function draw() {
+    ctx.clearRect(0,0,10000,10000);
     //enemyCar();
-    drawLine(ctx,radius);
-    playerCar(ctx, radius);
+    drawLine();
+    playerCar();
+    window.requestAnimationFrame(draw);
+    console.log(carYoffset);
     
 }
 
-function drawLine(ctx,radius) {
-    for(var i=-1000; i <= 1200; i += 40) {
+function drawLine() {
+    var time = new Date();
+    for(var i=-1000+time.getMilliseconds(); i <= 2000; i += 200) {
         ctx.beginPath();
-        ctx.rect(radius,i,10,20);
+        ctx.rect(radius,i,12,50);
         ctx.stroke();
     }
+    
     ctx.beginPath();
     ctx.lineWidth = 1;
     ctx.moveTo(radius-200,-1000);
-    ctx.lineTo(radius-200,1000);
+    ctx.lineTo(radius-200,2000);
     ctx.stroke();
     ctx.beginPath();
     ctx.lineWidth = 1;
     ctx.moveTo(radius+200,-1000);
-    ctx.lineTo(radius+200,1000);
+    ctx.lineTo(radius+200,2000);
     ctx.stroke();
     
 }
 
-function playerCar(ctx, radius) {
+function playerCar() {
     ctx.beginPath();
-    ctx.rect(radius+60,200,100,200);
-    ctx.stroke();
+    ctx.rect(x+carXoffset,600+carYoffset,100,200);
+    ctx.fillStyle = farge;
+    ctx.fill();
+}
+
+function changeOffset(e){
+    console.log(e.code);
+    switch(e.code){
+        case('ArrowLeft'):
+            if(carXoffset>=-195){
+                carXoffset -= 7;
+                break;
+            }else{break;}
+        case('ArrowRight'):
+            if(carXoffset<=95){
+                carXoffset += 7;
+                break;
+            }else{break;}
+        case('ArrowUp'):
+            if(carYoffset>=-550){
+                carYoffset -= 7;
+                break;
+            }else{break;}
+        case('ArrowDown'):
+            if(carYoffset<=550){
+                carYoffset+=7;
+                break;
+            }else{break;}
+    }
 }
