@@ -1,0 +1,15 @@
+#playBtn{
+    background-color: green;
+    
+    border-radius: 25px;
+}
+ul{
+    list-style-type: none;
+    display: inline-block;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+html { overflow-y: hidden; overflow-x: hidden; }
