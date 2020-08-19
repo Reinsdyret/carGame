@@ -12,4 +12,11 @@ body {
     background-color: aliceblue;
 }
 
+#enemyCar{
+    width: 100px;
+    height: 200px;
+    position: relative;
+    background: black;
+}
+
 html { overflow-y: hidden; overflow-x: hidden; }
