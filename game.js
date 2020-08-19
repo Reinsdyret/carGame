@@ -5,9 +5,13 @@ canvas.height= window.innerHeight;
 var ctx = canvas.getContext("2d");
 var radius = canvas.height / 2;
 var x = radius;
+var y = 600;
 var carXoffset = 60;
 var carYoffset = 0;
 var farge;
+var value = false;
+var enemyY = 100;
+var file;
 setInterval(draw(),1000);
 
 // Small thing for girlfriend ik SIMP
@@ -22,11 +26,10 @@ if(synne == 'ja') {
 function draw() {
     //Draw function
     ctx.clearRect(0,0,10000,10000);
-    //enemyCar();
+    enemyCar();
     drawLine();
     playerCar();
     window.requestAnimationFrame(draw);
-    console.log(carYoffset);
     
 }
 
@@ -55,9 +58,20 @@ function drawLine() {
 function playerCar() {
     //draws the player car based of position from the changeOffset function and color based on small thing from girlfriend
     ctx.beginPath();
-    ctx.rect(x+carXoffset,600+carYoffset,100,200);
+    ctx.rect(x+carXoffset,y+carYoffset,100,200);
     ctx.fillStyle = farge;
     ctx.fill();
+}
+
+function enemyCar(){
+    ifEnemySpawned();
+    console.log(file);
+    var lanes = [-140,+60];
+    var enemyX = radius + lanes[file];
+    ctx.beginPath();
+    ctx.rect(enemyX,enemyY,100,200);
+    ctx.fill();
+    ifEnemyBottom(enemyY);
 }
 
 function changeOffset(e){
@@ -84,9 +98,24 @@ function changeOffset(e){
             }else{break;}
         case('ArrowDown'):
         //if car is at the bottom
-            if(carYoffset<=550){
+            if(carYoffset<=canvas.height / 2 -400){
                 carYoffset+=7;
                 break;
             }else{break;}
     }
+}
+
+function ifEnemySpawned() {
+    if (!value) {
+        value = true;
+        file = randomFile();
+    }
+}
+
+function randomFile(){
+    return Math.round(Math.random());
+}
+
+function ifEnemyBottom(enemyY) {
+    value = enemyY < y + carYoffset ? true : false;
 }
