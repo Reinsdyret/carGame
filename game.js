@@ -1,33 +1,26 @@
 var canvas = document.getElementById("canvas");
 document.addEventListener('keydown',changeOffset);
-canvas.width = window.innerWidth;
-canvas.height= window.innerHeight;
+canvas.width = 1000;
+canvas.height= 1000;
 var ctx = canvas.getContext("2d");
 var radius = canvas.height / 2;
 var x = radius;
-var carXoffset = 60;
-var carYoffset = 0;
-var farge;
-setInterval(draw(),1000);
-
-// Small thing for girlfriend ik SIMP
-var synne = prompt('Er du synne?');
-
-if(synne == 'ja') {
-    farge = '#FFC0CB';
-}else{farge = '#000000'}
-//Small thing done
-
+var carY = 600;
+var carX = x + 60;
+var value = false;
+var enemyX;
+var enemyY = 100;
+var file = 1;
+setInterval(draw(),10);
 
 function draw() {
     //Draw function
     ctx.clearRect(0,0,10000,10000);
-    //enemyCar();
+    enemyCar();
     drawLine();
     playerCar();
+    //checkCollision();
     window.requestAnimationFrame(draw);
-    console.log(carYoffset);
-    
 }
 
 function drawLine() {
@@ -55,9 +48,24 @@ function drawLine() {
 function playerCar() {
     //draws the player car based of position from the changeOffset function and color based on small thing from girlfriend
     ctx.beginPath();
-    ctx.rect(x+carXoffset,600+carYoffset,100,200);
-    ctx.fillStyle = farge;
+    ctx.rect(carX,carY,100,200);
+    ctx.fillStyle = '#00FF00';
     ctx.fill();
+}
+
+function enemyCar(){
+    var lanes = [-160,+60];
+    enemyX = radius + lanes[file];
+    ctx.beginPath();
+    ctx.rect(enemyX,enemyY,100,200);
+    ctx.fillStyle = '#000000';
+    ctx.fill();
+    if(enemyY == 1000){
+        enemyY = 0;
+        file = randomFile();
+    }else{
+        enemyY+=2.5;
+    }
 }
 
 function changeOffset(e){
@@ -66,27 +74,32 @@ function changeOffset(e){
     switch(e.code){
         case('ArrowLeft'):
         //if car is at line left
-            if(carXoffset>=-195){
-                carXoffset -= 7;
+            if(carX>=-121){
+                carX = 500 - 160;
                 break;
             }else{break;}
         case('ArrowRight'):
         //if car is at line right
-            if(carXoffset<=95){
-                carXoffset += 7;
-                break;
-            }else{break;}
-        case('ArrowUp'):
-        //if car is at the top
-            if(carYoffset>=-550){
-                carYoffset -= 7;
-                break;
-            }else{break;}
-        case('ArrowDown'):
-        //if car is at the bottom
-            if(carYoffset<=550){
-                carYoffset+=7;
+            if(carX<=x+60){
+                carX = 500 + 60;
                 break;
             }else{break;}
     }
 }
+
+function ifEnemySpawned() {
+    if (!value) {
+        value = true;
+        file = randomFile();
+    }
+}
+
+function randomFile(){
+    return Math.round(Math.random());
+}
+
+/*function checkCollision(){
+    if(enemyX == carX && enemyY  <= carY + 200 && enemyY+190 >= carY+200 ){
+        prompt('u ded');
+    }
+}*/
