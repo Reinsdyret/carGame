@@ -20,3 +20,10 @@ body {
 }
 
 html { overflow-y: hidden; overflow-x: hidden; }
+
+#score{
+    position: relative;
+    background-color: aqua;
+    left: 3fr;
+    top: 1fr;
+}

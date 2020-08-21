@@ -11,6 +11,7 @@ var value = false;
 var enemyX;
 var enemyY = 100;
 var file = 1;
+var score = 0;
 setInterval(draw(),10);
 
 function draw() {
@@ -20,6 +21,7 @@ function draw() {
     drawLine();
     playerCar();
     //checkCollision();
+    checkPoint();
     window.requestAnimationFrame(draw);
 }
 
@@ -103,3 +105,16 @@ function randomFile(){
         prompt('u ded');
     }
 }*/
+
+
+function checkPoint(){
+    if(enemyY == 1000){
+        score++;
+        drawScore();
+    }
+}
+
+function drawScore(){
+    let pScore = document.getElementById("score");
+    pScore.innerHTML = score;
+}
